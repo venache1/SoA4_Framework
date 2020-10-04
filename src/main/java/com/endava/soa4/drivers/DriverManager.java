@@ -7,12 +7,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import static com.endava.soa4.utils.PropertyLoader.getProperties;
 
 public class DriverManager {
- private static WebDriver driver;
+    private static WebDriver driver;
 
     public static WebDriver getManager(DriverType type) {
         switch (type) {
@@ -26,33 +25,28 @@ public class DriverManager {
     }
 
     private static WebDriver getChromeDriver() {
-        if (driver == null){
+        if (driver == null) {
             ChromeOptions options = new ChromeOptions();
             try {
                 options.setHeadless(Boolean.parseBoolean(getProperties("headless")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
             System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-            WebDriver driver = new ChromeDriver(options);
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
         }
         return driver;
     }
-    private static WebDriver getFirefoxDriver() {
-        if (driver == null){
-            FirefoxOptions options = new FirefoxOptions();
 
-            driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
+    private static WebDriver getFirefoxDriver() {
+        if (driver == null) {
+            FirefoxOptions options = new FirefoxOptions();
             try {
                 options.setHeadless(Boolean.parseBoolean(getProperties("headless")));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            driver.manage().window().maximize();
-            System.setProperty("webdriver.ghecko.driver","drivers/geckodriver.exe");
+            System.setProperty("webdriver.ghecko.driver", "drivers/geckodriver.exe");
             driver = new FirefoxDriver();
         }
         return driver;
