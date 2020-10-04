@@ -1,4 +1,4 @@
-package com.endava.soa4;
+package com.endava.soa4.drivers;
 
 public enum DriverType {
     CHROME,
